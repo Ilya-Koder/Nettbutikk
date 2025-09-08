@@ -1,10 +1,10 @@
 import { sequelize } from "../models/sequelize.js";
 
-export async function getFurniture(req, res, next) {
+export async function getProducts(req, res, next) {
   const { id } = req.params;
 
   const [result, count] = await sequelize.query(
-    `select * from t_Furniture where id = ${id}`
+    `select * from t_Products where id = ${id}`
   );
 
   if (!result || count < 1) {
