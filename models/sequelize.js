@@ -7,6 +7,7 @@ console.log(
   "Test",
   process.env.dialect,
   process.env.DB_username,
+  process.env.DB_password,
   process.env.host
 );
 
