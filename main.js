@@ -1,5 +1,6 @@
 import express from "express";
 import session from "express-session";
+import dotenv from "dotenv";
 import productRouter from "./routes/products.js";
 import authRouter from "./routes/auth.js";
 import { sequelize } from "./models/sequelize.js";
@@ -9,10 +10,10 @@ import "./strategy/local.js";
 const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-
+dotenv.config();
 app.use(
   session({
-    secret: "eitelleranna",
+    secret: process.env.secret,
     resave: false,
     saveUninitialized: false,
     cookie: { secure: false },

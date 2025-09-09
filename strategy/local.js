@@ -11,14 +11,12 @@ export default passport.use(
     async (email, password, done) => {
       if (!email || !password) {
         return done(null, false, { message: "Email or password not valid" });
-        console.log("memmeme");
       }
       const [[user]] = await sequelize.query(
         `select * from t_Users where Email = '${email}'`
       );
       console.log(user);
       if (!user || password !== user.Password) {
-        console.log(user.Password, password);
         return done(null, false, { message: "Incorrect email or password" });
       }
       return done(null, user);
@@ -30,10 +28,10 @@ passport.serializeUser((user, done) => {
   console.log(user, "serialisation");
   done(null, user.ID);
 });
+
 passport.deserializeUser(async (id, done) => {
   const [[user]] = await sequelize.query(
     `select * from t_Users where id = ${id}`
   );
-  console.log(user, "deserialisation");
   done(null, user);
 });
